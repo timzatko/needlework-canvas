@@ -1,9 +1,3 @@
-@import '~@angular/material/theming';
-
-@include mat-core();
-
-$primary: mat-palette($mat-indigo);
-
 .preview {
     width: 100vw;
     height: 100vh;
@@ -51,7 +45,7 @@ $primary: mat-palette($mat-indigo);
         display: inline-block;
 
         &.highlighted {
-            border: 1px solid mat-color($primary);
+            border: 1px solid gray;
             opacity: 1;
         }
     }
