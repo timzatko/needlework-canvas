@@ -9,8 +9,8 @@ import RgbQuant from 'rgbquant';
 const MaxAnyDimension = 80;
 
 function getIdealSizeFactor(sizeFactor: number, image: Image) {
-    sizeFactor = Math.min( MaxAnyDimension / image.width, sizeFactor);
-    return Math.round(Math.min( MaxAnyDimension / image.height, sizeFactor) * 100) / 100;
+    sizeFactor = Math.min(MaxAnyDimension / image.width, sizeFactor);
+    return Math.round(Math.min(MaxAnyDimension / image.height, sizeFactor) * 100) / 100;
 }
 
 function loadRawImage([rawImage, sizeFactor]: [string | ArrayBuffer, number]): Observable<{
@@ -21,7 +21,9 @@ function loadRawImage([rawImage, sizeFactor]: [string | ArrayBuffer, number]): O
     // @ts-ignore
     return from(Image.load(rawImage)).pipe(
         map((image: Image) => {
-            sizeFactor = getIdealSizeFactor(sizeFactor, image);
+            if (sizeFactor === Infinity) {
+                sizeFactor = getIdealSizeFactor(sizeFactor, image);
+            }
             return { originalImage: image, resizedImage: image.resize({ factor: sizeFactor }), sizeFactor };
         }),
     );
@@ -71,7 +73,7 @@ export class ConversionService {
     private state$ = new BehaviorSubject<State>(State.Default);
 
     public rawImage$: BehaviorSubject<string | ArrayBuffer> = new BehaviorSubject<string | ArrayBuffer | null>(null);
-    public sizeFactor$: BehaviorSubject<number> = new BehaviorSubject<number>(1);
+    public sizeFactor$: BehaviorSubject<number> = new BehaviorSubject<number>(Infinity);
     public colors$: BehaviorSubject<number> = new BehaviorSubject<number>(25);
 
     public imageObservable: Observable<{ originalImage: Image; resizedImage: Image }> = combineLatest([
@@ -93,11 +95,13 @@ export class ConversionService {
 
     load(rawImage: string | ArrayBuffer) {
         this.state$.next(State.Loading);
+        this.sizeFactor$.next(Infinity);
         this.rawImage$.next(rawImage);
     }
 
     clear() {
-        this.rawImage$.next(null);
         this.state$.next(State.Default);
+        this.sizeFactor$.next(Infinity);
+        this.rawImage$.next(null);
     }
 }
