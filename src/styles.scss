@@ -1,6 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
 
 body {
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.02);
+    margin: 0;
+    padding: 0;
+}
+
+ngx-file-drop {
+    color: inherit;
+
+    > .ngx-file-drop__drop-zone {
+        color: inherit;
+        height: 200px !important;
+        border-radius: 4px !important;
+        border: 2px solid transparent !important;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        .ngx-file-drop__content {
+            color: inherit;
+        }
+    }
 }

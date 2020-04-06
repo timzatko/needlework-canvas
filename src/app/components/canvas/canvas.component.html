@@ -1,0 +1,26 @@
+<div [ngStyle]="{ width: width + 48 + 'px', height: height + 48 + 'px' }">
+    <svg [attr.width]="width" [attr.height]="height">
+        <line
+            *ngFor="let line of lines"
+            [ngStyle]="{ 'stroke-width': lineWidth }"
+            [attr.x1]="line.x1"
+            [attr.y1]="line.y1"
+            [attr.x2]="line.x2"
+            [attr.y2]="line.y2"
+        />
+
+        <rect
+            *ngFor="let pixel of pixels"
+            [ngStyle]="{
+                fill: pixel.color.toString(),
+                'stroke-width': 1,
+                stroke: pixel.highlighted ? 'yellow' : 'transparent'
+            }"
+            [attr.x]="pixel.x"
+            [attr.y]="pixel.y"
+            [attr.width]="pixelSize"
+            [attr.height]="pixelSize"
+            (click)="onPixelClick(pixel)"
+        />
+    </svg>
+</div>

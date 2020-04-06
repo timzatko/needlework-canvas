@@ -21,6 +21,9 @@
     "@angular/platform-browser": "~9.1.0",
     "@angular/platform-browser-dynamic": "~9.1.0",
     "@angular/router": "~9.1.0",
+    "image-js": "^0.21.9",
+    "ngx-file-drop": "^9.0.0",
+    "rgbquant": "^1.1.2",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"

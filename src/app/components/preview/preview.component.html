@@ -1,0 +1,46 @@
+<div class="preview">
+    <div class="canvas">
+        <app-canvas
+          (pixelSelected)="onPixelSelected($event)"
+          [selectedPixel]="selectedPixel"
+          [image]="image"
+        ></app-canvas>
+    </div>
+    <div class="options">
+        <mat-card *ngIf="previewImage">
+            <h2>Preview</h2>
+            <img [src]="previewImage" alt="" class="preview-image" />
+        </mat-card>
+        <mat-card *ngIf="image">
+            <h2>Options</h2>
+            <div>
+                <mat-form-field appearance="outline">
+                    <mat-label>Colors</mat-label>
+                    <input matInput type="number" name="colors" [(ngModel)]="colorCount" />
+                </mat-form-field>
+                <div>
+                    <mat-label>Size</mat-label>&nbsp;&nbsp;
+                    <mat-slider min="0" max="100" step="1" [(value)]="sizeFactor"></mat-slider>
+                    <span>&nbsp;&nbsp;{{ sizeFactor }}%</span>
+                    <div>Dimensions: {{ getDimension('width') }}px x {{ getDimension('height') }}px</div>
+                </div>
+            </div>
+            <div>
+                <button mat-raised-button (click)="onGenerate()">Generate</button>
+            </div>
+        </mat-card>
+        <mat-card *ngIf="palette">
+            <h2>Palette</h2>
+            <div>Number of colors: {{ palette.length }}</div>
+            <div class="palette" [class.has-highlighted]="hasHighlighted()">
+                <div
+                    *ngFor="let color of palette"
+                    class="color"
+                    [class.highlighted]="isColorHighlighted(color)"
+                    [ngStyle]="{ 'background-color': color.toString() }"
+                    (click)="onSelectColor(color)"
+                ></div>
+            </div>
+        </mat-card>
+    </div>
+</div>
