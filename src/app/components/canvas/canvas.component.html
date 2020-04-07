@@ -10,19 +10,19 @@
         />
 
         <rect
-            *ngFor="let pixel of pixels"
+            *ngFor="let svgPixel of svgPixels; trackBy: trackByFn"
             [ngStyle]="{
-                fill: pixel.pixel.color.toString(),
+                fill: svgPixel.pixel.color.toString(),
                 'stroke-width': 1,
-                stroke: isPixelHighlighted(pixel.pixel) ? 'yellow' : 'transparent'
+                stroke: isPixelHighlighted(svgPixel.pixel) ? 'yellow' : 'transparent'
             }"
-            [attr.x]="pixel.x"
-            [attr.y]="pixel.y"
+            [attr.x]="svgPixel.x"
+            [attr.y]="svgPixel.y"
             [attr.width]="pixelSize"
             [attr.height]="pixelSize"
-            (click)="onPixelClick(pixel.pixel)"
-            [class.highlighted]="isPixelHighlighted(pixel.pixel)"
-            [matTooltip]="'[ ' + pixel.pixel.x + ', ' + pixel.pixel.y + ' ]'"
+            (click)="onPixelClick(svgPixel.pixel)"
+            [class.highlighted]="isPixelHighlighted(svgPixel.pixel)"
+            [matTooltip]="'[ ' + svgPixel.pixel.x + ', ' + svgPixel.pixel.y + ' ]'"
         />
     </svg>
 </div>

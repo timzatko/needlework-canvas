@@ -23,6 +23,12 @@ export interface Pixel {
     color: Color;
 }
 
+export interface SvgPixel {
+    pixel: Pixel;
+    x: number;
+    y: number;
+}
+
 @Component({
     selector: 'app-canvas',
     templateUrl: './canvas.component.html',
@@ -44,7 +50,7 @@ export class CanvasComponent implements OnInit, OnChanges {
     lineWidth = LINE_WIDTH;
     pixelSize = PIXEL_SIZE;
     lines: { x1: number; y1: number; x2: number; y2: number }[] = [];
-    pixels: { pixel: Pixel; x: number; y: number }[] = [];
+    svgPixels: SvgPixel[] = [];
 
     constructor(public cd: ChangeDetectorRef) {}
 
@@ -88,6 +94,10 @@ export class CanvasComponent implements OnInit, OnChanges {
         return this.selectedColor && this.selectedColor.toString() === pixel.color.toString();
     }
 
+    trackByFn(index: number, svgPixel: SvgPixel) {
+        return svgPixel.pixel.toString();
+    }
+
     private resizeCanvas(image: Image) {
         this.width = image.width * BLOCK_WIDTH;
         this.height = image.height * BLOCK_WIDTH;
@@ -118,7 +128,7 @@ export class CanvasComponent implements OnInit, OnChanges {
             const x = pixelNumber % width;
             const y = Math.floor(pixelNumber / width);
 
-            this.pixels.push({
+            this.svgPixels.push({
                 x: x * BLOCK_WIDTH,
                 y: y * BLOCK_WIDTH,
                 pixel: {
