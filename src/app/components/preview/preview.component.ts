@@ -6,6 +6,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import Image from 'image-js';
 import { Palette } from '../../services/conversion.types';
 import { Color } from '../../models/color';
+import { saveSvgAsPng } from 'save-svg-as-png';
 
 const MAX_IMAGE_SIZE = 500;
 
@@ -22,6 +23,7 @@ export class PreviewComponent implements OnInit, OnDestroy {
     public palette: Palette = [];
 
     private unsubscribe$ = new Subject();
+    isDownloading = false;
 
     sizeFactorValue: number;
     colorCountValue: number;
@@ -120,5 +122,17 @@ export class PreviewComponent implements OnInit, OnDestroy {
             ),
             100,
         );
+    }
+
+    onDownload() {
+        if (!this.isDownloading) {
+            this.isDownloading = true;
+
+            setTimeout(() => {
+                saveSvgAsPng(document.getElementById('canvas'), 'canvas.png', { scale: 1 }).then(() => {
+                    this.isDownloading = false;
+                });
+            });
+        }
     }
 }

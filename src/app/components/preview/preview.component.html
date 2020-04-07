@@ -26,7 +26,8 @@
                 </div>
             </div>
             <div class="action">
-                <button color="primary" mat-raised-button (click)="onGenerate()">Generate</button>
+                <button color="primary" mat-raised-button (click)="onGenerate()">Generate</button>&nbsp;
+                <button color="primary" mat-button (click)="onDownload()" [disabled]="isDownloading">Download</button>
             </div>
         </mat-card>
         <mat-card *ngIf="palette">
