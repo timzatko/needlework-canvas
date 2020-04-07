@@ -44,7 +44,7 @@ export class CanvasComponent implements OnInit, OnChanges {
     lineWidth = LINE_WIDTH;
     pixelSize = PIXEL_SIZE;
     lines: { x1: number; y1: number; x2: number; y2: number }[] = [];
-    pixels: Pixel[] = [];
+    pixels: { pixel: Pixel; x: number; y: number }[] = [];
 
     constructor(public cd: ChangeDetectorRef) {}
 
@@ -115,13 +115,17 @@ export class CanvasComponent implements OnInit, OnChanges {
 
         for (let i = 0; i < data.length; i += 4) {
             const pixelNumber = i / 4;
-            const x = (pixelNumber % width) * BLOCK_WIDTH;
-            const y = Math.floor(pixelNumber / width) * BLOCK_WIDTH;
+            const x = pixelNumber % width;
+            const y = Math.floor(pixelNumber / width);
 
             this.pixels.push({
-                x,
-                y,
-                color: new Color(data[i], data[i + 1], data[i + 2], data[i + 3]),
+                x: x * BLOCK_WIDTH,
+                y: y * BLOCK_WIDTH,
+                pixel: {
+                    x,
+                    y,
+                    color: new Color(data[i], data[i + 1], data[i + 2], data[i + 3]),
+                },
             });
         }
     }

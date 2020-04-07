@@ -25,3 +25,8 @@ ngx-file-drop {
         }
     }
 }
+
+.cdk-focused,
+.cdk-mouse-focused {
+    outline: none !important;
+}
