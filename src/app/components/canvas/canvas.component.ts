@@ -107,6 +107,7 @@ export class CanvasComponent implements OnInit, OnChanges, AfterViewInit {
 
     clear() {
         this.lines = [];
+        this.svgPixels = [];
     }
 
     onPixelClick(selectedPixel: Pixel) {
