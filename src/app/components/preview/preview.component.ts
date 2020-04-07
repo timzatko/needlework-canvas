@@ -86,7 +86,7 @@ export class PreviewComponent implements OnInit, OnDestroy {
     }
 
     getDimension(dimension: 'width' | 'height') {
-        return Math.floor(this.originalImage[dimension] * (this.sizeFactor / 100));
+        return Math.round(this.originalImage[dimension] * (this.sizeFactor / 100));
     }
 
     onColorSelected(color: Color) {
