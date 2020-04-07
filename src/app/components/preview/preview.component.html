@@ -1,8 +1,8 @@
 <div class="preview">
     <div class="canvas">
         <app-canvas
-          (pixelSelected)="onPixelSelected($event)"
-          [selectedPixel]="selectedPixel"
+          (selectColor)="onColorSelected($event)"
+          [selectedColor]="selectedColor"
           [image]="image"
         ></app-canvas>
     </div>
@@ -36,7 +36,7 @@
                 <div
                     *ngFor="let color of palette"
                     class="color"
-                    [class.highlighted]="isColorHighlighted(color)"
+                    [class.highlighted]="isColorSelected(color)"
                     [ngStyle]="{ 'background-color': color.toString() }"
                     (click)="onSelectColor(color)"
                 ></div>

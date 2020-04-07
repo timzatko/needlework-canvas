@@ -5,7 +5,6 @@ import { takeUntil } from 'rxjs/operators';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import Image from 'image-js';
 import { Palette } from '../../services/conversion.types';
-import { Pixel } from '../canvas/canvas.component';
 import { Color } from '../../models/color';
 
 @Component({
@@ -25,7 +24,7 @@ export class PreviewComponent implements OnInit, OnDestroy {
     sizeFactorValue: number;
     colorCountValue: number;
 
-    selectedPixel: Pixel;
+    selectedColor: Color;
 
     get colorCount() {
         return this.colorCountValue;
@@ -52,7 +51,7 @@ export class PreviewComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.conversionService.quantizedImageObservable.pipe(takeUntil(this.unsubscribe$)).subscribe(
             ({ image, originalImage, palette, colors, sizeFactor }) => {
-                this.clear();
+                this.clearSelectedColor();
 
                 this.palette = palette;
                 this.image = image;
@@ -85,25 +84,27 @@ export class PreviewComponent implements OnInit, OnDestroy {
         return Math.floor(this.originalImage[dimension] * (this.sizeFactor / 100));
     }
 
-    onPixelSelected(pixel: Pixel) {
-        this.selectedPixel = pixel;
+    onColorSelected(color: Color) {
+        this.selectedColor = color;
     }
 
-    clear() {
-        this.selectedPixel = undefined;
+    clearSelectedColor() {
+        this.selectedColor = undefined;
     }
 
-    isColorHighlighted(color: Color) {
-        return this.selectedPixel && color.toString() === this.selectedPixel.color.toString();
+    isColorSelected(color: Color) {
+        return this.selectedColor && this.selectedColor.toString() === color.toString();
     }
 
     hasHighlighted() {
-        return this.palette.some(color => this.isColorHighlighted(color));
+        return this.palette.some(color => this.isColorSelected(color));
     }
 
     onSelectColor(color: Color) {
-        if (this.isColorHighlighted(color)) {
-            this.selectedPixel = undefined;
+        if (this.isColorSelected(color)) {
+            this.clearSelectedColor();
+        } else {
+            this.selectedColor = color;
         }
     }
 }

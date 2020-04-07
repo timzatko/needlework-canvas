@@ -21,7 +21,6 @@ export interface Pixel {
     x: number;
     y: number;
     color: Color;
-    highlighted: boolean;
 }
 
 @Component({
@@ -33,6 +32,12 @@ export class CanvasComponent implements OnInit, OnChanges {
     @Input()
     image: Image;
 
+    @Input()
+    selectedColor: Color;
+
+    @Output()
+    selectColor = new EventEmitter<Color>();
+
     width: number;
     height: number;
 
@@ -40,12 +45,6 @@ export class CanvasComponent implements OnInit, OnChanges {
     pixelSize = PIXEL_SIZE;
     lines: { x1: number; y1: number; x2: number; y2: number }[] = [];
     pixels: Pixel[] = [];
-
-    @Output()
-    pixelSelected = new EventEmitter<Pixel>();
-
-    @Input()
-    selectedPixel: Pixel;
 
     constructor(public cd: ChangeDetectorRef) {}
 
@@ -63,14 +62,6 @@ export class CanvasComponent implements OnInit, OnChanges {
                 });
             }
         }
-
-        if ('selectedPixel' in changes) {
-            const selectedPixel = changes.selectedPixel.currentValue;
-
-            this.pixels.forEach(pixel => {
-                pixel.highlighted = selectedPixel && pixel.x === selectedPixel.x && pixel.y === selectedPixel.y;
-            });
-        }
     }
 
     draw(image: Image) {
@@ -86,14 +77,15 @@ export class CanvasComponent implements OnInit, OnChanges {
         this.lines = [];
     }
 
-    onPixelClick(currentPixel: Pixel) {
-        this.pixels.forEach(pixel => {
-            pixel.highlighted = pixel.x === currentPixel.x && pixel.y === currentPixel.y;
-        });
-
-        this.pixelSelected.emit(currentPixel);
+    onPixelClick(selectedPixel: Pixel) {
+        this.selectedColor = selectedPixel.color;
+        this.selectColor.emit(this.selectedColor);
 
         this.cd.detectChanges();
+    }
+
+    isPixelHighlighted(pixel: Pixel) {
+        return this.selectedColor && this.selectedColor.toString() === pixel.color.toString();
     }
 
     private resizeCanvas(image: Image) {
@@ -130,7 +122,6 @@ export class CanvasComponent implements OnInit, OnChanges {
                 x,
                 y,
                 color: new Color(data[i], data[i + 1], data[i + 2], data[i + 3]),
-                highlighted: false,
             });
         }
     }

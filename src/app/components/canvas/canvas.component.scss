@@ -4,19 +4,29 @@
     overflow: scroll;
     display: block;
 
-  > div {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    min-width: 100%;
-    min-height: 100%;
-  }
+    > div {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        min-width: 100%;
+        min-height: 100%;
+    }
 }
 
 svg {
     line {
         stroke: gray;
         stroke-opacity: 0.5;
+    }
+
+    &.has-highlighted rect {
+        opacity: 0.25;
+    }
+
+    rect {
+        &.highlighted {
+            opacity: 1;
+        }
     }
 }
