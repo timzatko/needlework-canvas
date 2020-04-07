@@ -7,7 +7,7 @@ import Image from 'image-js';
 import { Palette } from '../../services/conversion.types';
 import { Color } from '../../models/color';
 
-const MAX_IMAGE_SIZE = 1000;
+const MAX_IMAGE_SIZE = 500;
 
 @Component({
     selector: 'app-preview',
