@@ -1,5 +1,5 @@
 <div [ngStyle]="{ width: width + 48 + 'px', height: height + 48 + 'px' }">
-    <svg [attr.width]="width" [attr.height]="height" [class.has-highlighted]="!!selectedColor">
+    <svg *ngIf="svgPixels" [attr.width]="width" [attr.height]="height" [class.has-highlighted]="!!selectedColor">
         <line
             *ngFor="let line of lines"
             [ngStyle]="{ 'stroke-width': lineWidth }"
@@ -23,6 +23,7 @@
             (click)="onPixelClick(svgPixel.pixel)"
             [class.highlighted]="isPixelSelected(svgPixel.pixel)"
             [matTooltip]="'[ ' + svgPixel.pixel.x + ', ' + svgPixel.pixel.y + ' ]'"
+            #pixels
         />
     </svg>
 </div>

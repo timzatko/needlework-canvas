@@ -11,9 +11,10 @@ import { PreviewComponent } from './components/preview/preview.component';
 import { CanvasComponent } from './components/canvas/canvas.component';
 import { ConversionService } from './services/conversion.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoaderComponent } from './components/loader/loader.component';
 
 @NgModule({
-    declarations: [AppComponent, FilePickerComponent, PreviewComponent, CanvasComponent],
+    declarations: [AppComponent, FilePickerComponent, PreviewComponent, CanvasComponent, LoaderComponent],
     imports: [
         BrowserModule,
         FormsModule,

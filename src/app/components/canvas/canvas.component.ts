@@ -1,16 +1,21 @@
 import {
+    AfterViewInit,
     ChangeDetectorRef,
     Component,
+    ElementRef,
     EventEmitter,
     Input,
-    NgZone,
     OnChanges,
     OnInit,
     Output,
+    QueryList,
     SimpleChanges,
+    ViewChildren,
 } from '@angular/core';
 import Image from 'image-js';
 import { Color } from '../../models/color';
+import { ConversionService } from '../../services/conversion.service';
+import { State } from '../../services/conversion.types';
 
 const PIXEL_SIZE = 8;
 const SPACE_WIDTH = 1;
@@ -34,7 +39,7 @@ export interface SvgPixel {
     templateUrl: './canvas.component.html',
     styleUrls: ['./canvas.component.scss'],
 })
-export class CanvasComponent implements OnInit, OnChanges {
+export class CanvasComponent implements OnInit, OnChanges, AfterViewInit {
     @Input()
     image: Image;
 
@@ -52,9 +57,17 @@ export class CanvasComponent implements OnInit, OnChanges {
     lines: { x1: number; y1: number; x2: number; y2: number }[] = [];
     svgPixels: SvgPixel[] = [];
 
-    constructor(public cd: ChangeDetectorRef) {}
+    @ViewChildren('pixels') pixels: QueryList<ElementRef>;
+
+    constructor(public cd: ChangeDetectorRef, public conversionService: ConversionService) {}
 
     ngOnInit(): void {}
+
+    ngAfterViewInit() {
+        this.pixels.changes.subscribe(() => {
+            this.conversionService.setState(State.Editing,);
+        });
+    }
 
     ngOnChanges(changes: SimpleChanges): void {
         if ('image' in changes) {
@@ -71,6 +84,8 @@ export class CanvasComponent implements OnInit, OnChanges {
     }
 
     draw(image: Image) {
+        this.conversionService.setState(State.Loading);
+
         this.resizeCanvas(image);
 
         setTimeout(() => {

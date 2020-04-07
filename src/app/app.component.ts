@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ConversionService } from './services/conversion.service';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { State } from './services/conversion.types';
+import {Component, OnInit} from '@angular/core';
+import {ConversionService} from './services/conversion.service';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {State} from './services/conversion.types';
 
 @Component({
     selector: 'app-root',

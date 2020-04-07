@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Image } from 'image-js';
-import { BehaviorSubject, combineLatest, from, Observable } from 'rxjs';
-import { filter, flatMap, map, tap } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, from, Observable, of } from 'rxjs';
+import { debounceTime, filter, flatMap, map, tap } from 'rxjs/operators';
 import { Palette, QuantizedImage, State } from './conversion.types';
 import { Color } from '../models/color';
 import RgbQuant from 'rgbquant';
@@ -84,12 +84,15 @@ export class ConversionService {
     public quantizedImageObservable: Observable<QuantizedImage> = combineLatest([
         this.imageObservable,
         this.colors$,
-    ]).pipe(
-        map(quantizeImage),
-        tap(() => this.state$.next(State.Editing)),
-    );
+    ]).pipe(map(quantizeImage));
 
     public stateObservable: Observable<State> = this.state$.asObservable();
+
+    setState(state: State) {
+        if (state !== this.state$.getValue()) {
+            this.state$.next(state);
+        }
+    }
 
     constructor() {}
 
