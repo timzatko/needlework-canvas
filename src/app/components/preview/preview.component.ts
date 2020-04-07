@@ -52,6 +52,8 @@ export class PreviewComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.conversionService.quantizedImageObservable.pipe(takeUntil(this.unsubscribe$)).subscribe(
             ({ image, originalImage, palette, colors, sizeFactor }) => {
+                this.clear();
+
                 this.palette = palette;
                 this.image = image;
                 this.originalImage = originalImage;
@@ -87,6 +89,10 @@ export class PreviewComponent implements OnInit, OnDestroy {
         this.selectedPixel = pixel;
     }
 
+    clear() {
+        this.selectedPixel = undefined;
+    }
+
     isColorHighlighted(color: Color) {
         return this.selectedPixel && color.toString() === this.selectedPixel.color.toString();
     }
@@ -97,7 +103,7 @@ export class PreviewComponent implements OnInit, OnDestroy {
 
     onSelectColor(color: Color) {
         if (this.isColorHighlighted(color)) {
-          this.selectedPixel = undefined;
+            this.selectedPixel = undefined;
         }
     }
 }
