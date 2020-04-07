@@ -84,13 +84,17 @@ export class CanvasComponent implements OnInit, OnChanges {
     }
 
     onPixelClick(selectedPixel: Pixel) {
-        this.selectedColor = selectedPixel.color;
-        this.selectColor.emit(this.selectedColor);
+        if (this.isPixelSelected(selectedPixel)) {
+            this.selectedColor = undefined;
+        } else {
+            this.selectedColor = selectedPixel.color;
+        }
 
+        this.selectColor.emit(this.selectedColor);
         this.cd.detectChanges();
     }
 
-    isPixelHighlighted(pixel: Pixel) {
+    isPixelSelected(pixel: Pixel) {
         return this.selectedColor && this.selectedColor.toString() === pixel.color.toString();
     }
 

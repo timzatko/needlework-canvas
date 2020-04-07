@@ -14,14 +14,14 @@
             [ngStyle]="{
                 fill: svgPixel.pixel.color.toString(),
                 'stroke-width': 1,
-                stroke: isPixelHighlighted(svgPixel.pixel) ? 'yellow' : 'transparent'
+                stroke: isPixelSelected(svgPixel.pixel) ? 'yellow' : 'transparent'
             }"
             [attr.x]="svgPixel.x"
             [attr.y]="svgPixel.y"
             [attr.width]="pixelSize"
             [attr.height]="pixelSize"
             (click)="onPixelClick(svgPixel.pixel)"
-            [class.highlighted]="isPixelHighlighted(svgPixel.pixel)"
+            [class.highlighted]="isPixelSelected(svgPixel.pixel)"
             [matTooltip]="'[ ' + svgPixel.pixel.x + ', ' + svgPixel.pixel.y + ' ]'"
         />
     </svg>
