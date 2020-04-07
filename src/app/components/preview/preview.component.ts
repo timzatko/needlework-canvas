@@ -4,7 +4,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import Image from 'image-js';
-import { Palette } from '../../services/conversion.types';
+import { Palette, State } from '../../services/conversion.types';
 import { Color } from '../../models/color';
 import { saveSvgAsPng } from 'save-svg-as-png';
 
@@ -75,6 +75,7 @@ export class PreviewComponent implements OnInit, OnDestroy {
     }
 
     onGenerate() {
+        this.conversionService.setState(State.Loading);
         this.conversionService.sizeFactor$.next(this.sizeFactorValue / 100);
         this.conversionService.colors$.next(this.colorCountValue);
     }

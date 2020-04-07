@@ -52,6 +52,8 @@ export class CanvasComponent implements OnInit, OnChanges, AfterViewInit {
     width: number;
     height: number;
 
+    isLoading = false;
+
     lineWidth = LINE_WIDTH;
     pixelSize = PIXEL_SIZE;
     lines: { x1: number; y1: number; x2: number; y2: number }[] = [];
@@ -61,11 +63,17 @@ export class CanvasComponent implements OnInit, OnChanges, AfterViewInit {
 
     constructor(public cd: ChangeDetectorRef, public conversionService: ConversionService) {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.conversionService.stateObservable.subscribe(state => {
+            setTimeout(() => this.isLoading = state === State.Loading);
+        });
+    }
 
     ngAfterViewInit() {
         this.pixels.changes.subscribe(() => {
-            this.conversionService.setState(State.Editing,);
+            if (this.pixels.length) {
+                this.conversionService.setState(State.Editing);
+            }
         });
     }
 
@@ -76,7 +84,12 @@ export class CanvasComponent implements OnInit, OnChanges, AfterViewInit {
             const image = changes.image.currentValue;
 
             if (image) {
+                if (!changes.image.previousValue) {
+                    this.resizeCanvas(image);
+                }
+
                 setTimeout(() => {
+                    this.resizeCanvas(image);
                     this.draw(image);
                 });
             }
@@ -85,8 +98,6 @@ export class CanvasComponent implements OnInit, OnChanges, AfterViewInit {
 
     draw(image: Image) {
         this.conversionService.setState(State.Loading);
-
-        this.resizeCanvas(image);
 
         setTimeout(() => {
             this.drawLines(image);

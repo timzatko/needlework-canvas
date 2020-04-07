@@ -15,6 +15,14 @@
 }
 
 svg {
+    opacity: 1;
+    transition: 0.5s;
+
+    &.is-loading {
+        visibility: hidden;
+        opacity: 0;
+    }
+
     line {
         stroke: gray;
         stroke-opacity: 0.5;
@@ -23,7 +31,6 @@ svg {
     &.has-highlighted rect {
         opacity: 0.25;
     }
-
     rect {
         &.highlighted {
             opacity: 1;
