@@ -7,6 +7,8 @@ import Image from 'image-js';
 import { Palette } from '../../services/conversion.types';
 import { Color } from '../../models/color';
 
+const MAX_IMAGE_SIZE = 1000;
+
 @Component({
     selector: 'app-preview',
     templateUrl: './preview.component.html',
@@ -106,5 +108,17 @@ export class PreviewComponent implements OnInit, OnDestroy {
         } else {
             this.selectedColor = color;
         }
+    }
+
+    getSliderMaxFactor() {
+        return Math.min(
+            Math.round(
+                Math.min(
+                    Math.min(MAX_IMAGE_SIZE / this.originalImage.height),
+                    MAX_IMAGE_SIZE / this.originalImage.width,
+                ) * 100,
+            ),
+            100,
+        );
     }
 }

@@ -1,9 +1,9 @@
 <div class="preview">
     <div class="canvas">
         <app-canvas
-          (selectColor)="onColorSelected($event)"
-          [selectedColor]="selectedColor"
-          [image]="image"
+            (selectColor)="onColorSelected($event)"
+            [selectedColor]="selectedColor"
+            [image]="image"
         ></app-canvas>
     </div>
     <div class="options">
@@ -20,7 +20,7 @@
                 </mat-form-field>
                 <div>
                     <mat-label>Size</mat-label>&nbsp;&nbsp;
-                    <mat-slider min="0" max="100" step="0.5" [(value)]="sizeFactor"></mat-slider>
+                    <mat-slider min="0" [max]="getSliderMaxFactor()" step="0.5" [(value)]="sizeFactor"></mat-slider>
                     <span>&nbsp;&nbsp;{{ sizeFactor }}%</span>
                     <div>Dimensions: {{ getDimension('width') }}px x {{ getDimension('height') }}px</div>
                 </div>
