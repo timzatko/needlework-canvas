@@ -43,7 +43,7 @@ export class PreviewComponent implements OnInit, OnDestroy {
     }
 
     set sizeFactor(value) {
-        this.sizeFactorValue = Math.min(Math.max(value, 1), 100);
+        this.sizeFactorValue = Math.round(Math.min(Math.max(value, 1), 100) * 10) / 10;
     }
 
     constructor(
