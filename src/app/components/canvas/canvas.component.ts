@@ -108,12 +108,12 @@ export class CanvasComponent implements OnInit, OnChanges {
         const LINE_OFFSET = PIXEL_SIZE + SPACE_WIDTH;
 
         // draw vertical lines
-        for (let i = 1; i < width - 1; i++) {
+        for (let i = 0; i < width - 1; i++) {
             const x = BLOCK_WIDTH * i + LINE_OFFSET;
             this.lines.push({ x1: x, y1: 0, x2: x, y2: height * BLOCK_WIDTH });
         }
 
-        for (let i = 1; i < height - 1; i++) {
+        for (let i = 0; i < height - 1; i++) {
             const y = BLOCK_WIDTH * i + LINE_OFFSET;
             this.lines.push({ x1: 0, y1: y, x2: width * BLOCK_WIDTH, y2: y });
         }
