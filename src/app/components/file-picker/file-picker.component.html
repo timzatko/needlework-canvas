@@ -1,31 +1,29 @@
-<div class="container">
-    <mat-card>
-        <div>
-            <ngx-file-drop dropZoneLabel="Drop image here..." (onFileDrop)="drop($event)">
-                <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
-                    <div class="mat-typography">
-                        You can drag&drop the image here.
-                    </div>
-                    <div>
-                        <button color="primary" (click)="openFileSelector()" mat-button>Browse Files</button>
-                    </div>
-                </ng-template>
-            </ngx-file-drop>
-            <ng-container *ngIf="image">
-                <div class="preview">
-                    <div class="mat-typography">
-                        <div class="mat-body-strong">Preview</div>
-                        <div>Name: {{ fileEntry.name }}</div>
-                        <div>Dimensions: {{ image.width }}px x {{ image.height }}px</div>
-                    </div>
-                    <div class="image"><img [src]="rawImage" alt="" /></div>
+<mat-card>
+    <div>
+        <ngx-file-drop dropZoneLabel="Drop image here..." (onFileDrop)="drop($event)">
+            <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+                <div class="mat-typography">
+                    You can drag&drop the image here.
                 </div>
-                <div class="action">
-                    <button color="primary" (click)="onSubmit()" mat-raised-button [disabled]="!canSubmit()">
-                        Generate Needlework Canvas!
-                    </button>
+                <div>
+                    <button color="primary" (click)="openFileSelector()" mat-button>Browse Files</button>
                 </div>
-            </ng-container>
-        </div>
-    </mat-card>
-</div>
+            </ng-template>
+        </ngx-file-drop>
+        <ng-container *ngIf="image">
+            <div class="image-preview">
+                <div class="mat-typography">
+                    <div class="mat-body-strong">Preview</div>
+                    <div>Name: {{ fileEntry.name }}</div>
+                    <div>Dimensions: {{ image.width }}px x {{ image.height }}px</div>
+                </div>
+                <div class="image"><img [src]="rawImage" alt="" /></div>
+            </div>
+            <div class="action">
+                <button color="primary" (click)="onSubmit()" mat-raised-button [disabled]="!canSubmit()">
+                    Generate Needlework Canvas!
+                </button>
+            </div>
+        </ng-container>
+    </div>
+</mat-card>

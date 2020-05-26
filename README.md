@@ -26,4 +26,4 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 
 ## Deployment
 
-The project is deployed automatically to [needlework.timzatko.eu](//needlework.timzatko.eu) on push to `master` branch.
+The project is deployed automatically to [needlework-canvas.timzatko.eu](//needlework-canvas.timzatko.eu) on push to `master` branch.
