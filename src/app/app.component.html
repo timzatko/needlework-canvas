@@ -1,7 +1,7 @@
 <ng-container *ngIf="currentState == stateValues.Default; else preview">
   <div class="container">
     <h1>Needlework Canvas</h1>
-    <p>A handy tool for creating a canvas from any images.</p>
+    <p>A handy tool for creating a needlework canvas from an image.</p>
     <app-file-picker (fileSubmit)="onFileSubmit($event)"></app-file-picker>
   </div>
 </ng-container>
