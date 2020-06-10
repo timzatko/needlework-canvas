@@ -12,24 +12,40 @@
 
     .content {
         padding: 20px;
-    }
 
-    .intro {
-        margin-bottom: 32px;
+        .intro {
+            margin-bottom: 32px;
 
-        h1 {
-            font-size: 34px;
+            h1 {
+                font-size: 34px;
+            }
+
+            img {
+                max-width: 100%;
+                margin-left: auto;
+                margin-right: auto;
+            }
         }
 
-        img {
-          max-width: 100%;
-          margin-left: auto;
-          margin-right: auto;
+        app-file-picker {
+            margin-top: 16px;
+            padding: 12px;
         }
     }
 
-    app-file-picker {
-        margin-top: 16px;
-        padding: 12px;
+    .footer {
+        width: 100%;
+        display: flex;
+        font-size: 12px;
+        padding: 8px 12px;
+        box-sizing: border-box;
+
+        > div {
+            width: 100%;
+        }
+
+        > div:last-child {
+            text-align: right;
+        }
     }
 }
