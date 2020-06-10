@@ -1,8 +1,8 @@
 # Contributing
 
-## Setup
+## Prerequisites
 
-This is compatible [node](https://nodejs.org/en/) version `12.x.x`.
+- [node](https://nodejs.org/en/) in version `12.x.x`.
 
 ## Development server
 
