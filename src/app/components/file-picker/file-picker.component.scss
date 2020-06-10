@@ -1,3 +1,7 @@
+:host {
+    display: block;
+}
+
 .image-preview {
     display: flex;
     flex-direction: row;
@@ -8,6 +12,7 @@
         padding: 12px;
         align-items: center;
         display: flex;
+        justify-content: center;
     }
 
     > div:nth-child(1) {
@@ -21,9 +26,19 @@
 
         img {
             max-height: 320px;
-            max-width: 320px;
+            max-width: 100%;
         }
     }
+}
+
+.action {
+  padding: 12px;
+  text-align: right;
+}
+
+.file-picker {
+    border: 3px dotted gray;
+    border-radius: 8px;
 }
 
 ngx-file-drop {

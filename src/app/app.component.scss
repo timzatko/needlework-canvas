@@ -9,4 +9,27 @@
     justify-content: center;
     margin-left: auto;
     margin-right: auto;
+
+    .content {
+        padding: 20px;
+    }
+
+    .intro {
+        margin-bottom: 32px;
+
+        h1 {
+            font-size: 34px;
+        }
+
+        img {
+          max-width: 100%;
+          margin-left: auto;
+          margin-right: auto;
+        }
+    }
+
+    app-file-picker {
+        margin-top: 16px;
+        padding: 12px;
+    }
 }

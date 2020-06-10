@@ -1,11 +1,22 @@
 <ng-container *ngIf="currentState == stateValues.Default; else preview">
   <div class="container">
-    <h1>Needlework Canvas</h1>
-    <p>A handy tool for creating a needlework canvas from an image.</p>
-    <app-file-picker (fileSubmit)="onFileSubmit($event)"></app-file-picker>
+    <mat-card>
+      <div class="content">
+        <div class="intro">
+          <h1>Needlework Canvas Creator</h1>
+          <p>A handy tool for creating a needlework canvas from an image.</p>
+          <p><b>For who is this tool for?</b><br>If you are interested in <a href="https://en.wikipedia.org/wiki/Needlework">needlework</a> and you would like to create a model based on an image for your artwork.
+          <p>All you need is just to upload the image. Then you can adjust the size of the canvas or the number of used colors.</p>
+          <img src="assets/example.png" alt="example" class="example" title="An example of the created model">
+        </div>
+        <hr>
+        <app-file-picker (fileSubmit)="onFileSubmit($event)"></app-file-picker>
+      </div>
+    </mat-card>
   </div>
 </ng-container>
 <ng-template #preview>
   <app-preview></app-preview>
 </ng-template>
 <app-loader></app-loader>
+
