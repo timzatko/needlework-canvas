@@ -14,10 +14,6 @@ jobs:
             - run: npm ci
             - run: npm run lint
             - run: npm run prettier:lint
-            - uses: actions/upload-artifact@v1
-              with:
-                  name: build
-                  path: dist
 
     build:
         runs-on: ubuntu-latest
