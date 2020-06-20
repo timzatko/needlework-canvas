@@ -1,7 +1,7 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Subject} from 'rxjs';
-import {ConversionService} from '../../services/conversion.service';
-import {State} from '../../services/conversion.types';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
+import { ConversionService } from '../../services/conversion.service';
+import { State } from '../../services/conversion.types';
 
 @Component({
     selector: 'app-loader',
@@ -16,10 +16,9 @@ export class LoaderComponent implements OnInit, OnDestroy {
     constructor(private conversionService: ConversionService) {}
 
     ngOnInit(): void {
-        this.conversionService.stateObservable
-            .subscribe(state => {
-                this.isLoading = state === State.Loading;
-            });
+        this.conversionService.stateObservable.subscribe(state => {
+            this.isLoading = state === State.Loading;
+        });
     }
 
     ngOnDestroy(): void {

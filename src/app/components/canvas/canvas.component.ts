@@ -65,7 +65,7 @@ export class CanvasComponent implements OnInit, OnChanges, AfterViewInit {
 
     ngOnInit(): void {
         this.conversionService.stateObservable.subscribe(state => {
-            setTimeout(() => this.isLoading = state === State.Loading);
+            setTimeout(() => (this.isLoading = state === State.Loading));
         });
     }
 
